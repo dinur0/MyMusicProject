@@ -14,7 +14,6 @@
 		9BC7BE5C2C134416007E5444 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC7BE5A2C134416007E5444 /* LaunchScreen.storyboard */; };
 		9BC7BE652C135059007E5444 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC7BE642C135059007E5444 /* TableViewController.swift */; };
 		9BC7BE672C1350C1007E5444 /* SoundTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC7BE662C1350C1007E5444 /* SoundTrack.swift */; };
-		9BC7BE6B2C136AA9007E5444 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC7BE6A2C136AA9007E5444 /* Music.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		9BC7BE5D2C134416007E5444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BC7BE642C135059007E5444 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		9BC7BE662C1350C1007E5444 /* SoundTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTrack.swift; sourceTree = "<group>"; };
-		9BC7BE6A2C136AA9007E5444 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +39,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B3F0C3B2C15E86B00C40D89 /* MSC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MSC;
+			sourceTree = "<group>";
+		};
 		9BC7BE432C134414007E5444 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +65,7 @@
 		9BC7BE4E2C134414007E5444 /* MyAudioplayer */ = {
 			isa = PBXGroup;
 			children = (
+				9B3F0C3B2C15E86B00C40D89 /* MSC */,
 				9BC7BE662C1350C1007E5444 /* SoundTrack.swift */,
 				9BC7BE642C135059007E5444 /* TableViewController.swift */,
 				9BC7BE4F2C134414007E5444 /* AppDelegate.swift */,
@@ -68,17 +74,8 @@
 				9BC7BE582C134416007E5444 /* Assets.xcassets */,
 				9BC7BE5A2C134416007E5444 /* LaunchScreen.storyboard */,
 				9BC7BE5D2C134416007E5444 /* Info.plist */,
-				9BC7BE632C13442F007E5444 /* music */,
-				9BC7BE6A2C136AA9007E5444 /* Music.swift */,
 			);
 			path = MyAudioplayer;
-			sourceTree = "<group>";
-		};
-		9BC7BE632C13442F007E5444 /* music */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +151,6 @@
 			files = (
 				9BC7BE502C134414007E5444 /* AppDelegate.swift in Sources */,
 				9BC7BE672C1350C1007E5444 /* SoundTrack.swift in Sources */,
-				9BC7BE6B2C136AA9007E5444 /* Music.swift in Sources */,
 				9BC7BE652C135059007E5444 /* TableViewController.swift in Sources */,
 				9BC7BE522C134414007E5444 /* SceneDelegate.swift in Sources */,
 			);
@@ -313,6 +309,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -340,6 +337,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

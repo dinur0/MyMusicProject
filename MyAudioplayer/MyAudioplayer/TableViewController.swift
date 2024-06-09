@@ -1,8 +1,15 @@
 import UIKit
+import AVFoundation
+
+struct Song {
+    let url: URL
+    let title: String
+    let artist: String
+}
 
 class TableViewController: UITableViewController {
 
-    var songs: [URL] = []
+    var songs: [Song] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -11,7 +18,7 @@ class TableViewController: UITableViewController {
     
     func loadMusicFiles() {
         if let resourcePath = Bundle.main.resourcePath {
-            let musicFolderPath = resourcePath + "/Musics"
+            let musicFolderPath = resourcePath + "/MSC"
             let fileManager = FileManager.default
             do {
                 let files = try fileManager.contentsOfDirectory(atPath: musicFolderPath)
@@ -19,7 +26,10 @@ class TableViewController: UITableViewController {
                     if file.hasSuffix(".mp3") {
                         let filePath = musicFolderPath + "/" + file
                         let fileURL = URL(fileURLWithPath: filePath)
-                        songs.append(fileURL)
+                        let metadata = getMetadata(for: fileURL)
+                        let song = Song(url: fileURL, title: metadata.title, artist: metadata.artist)
+                        songs.append(song)
+                        print(song)
                     }
                 }
             } catch {
@@ -27,6 +37,22 @@ class TableViewController: UITableViewController {
             }
         }
         tableView.reloadData()
+    }
+
+    func getMetadata(for url: URL) -> (title: String, artist: String) {
+        let asset = AVAsset(url: url)
+        var title = "Unknown Title"
+        var artist = "Unknown Artist"
+        
+        for metadataItem in asset.commonMetadata {
+            if metadataItem.commonKey == .commonKeyTitle {
+                title = metadataItem.stringValue ?? title
+            } else if metadataItem.commonKey == .commonKeyArtist {
+                artist = metadataItem.stringValue ?? artist
+            }
+        }
+        
+        return (title, artist)
     }
 
     // MARK: - Table view data source
@@ -41,7 +67,10 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = songs[indexPath.row].lastPathComponent
+        let song = songs[indexPath.row]
+//        cell.textLabel?.text = "sdfsdfsdf"
+        cell.textLabel?.text = song.title
+        cell.detailTextLabel?.text = song.artist
         return cell
     }
 
@@ -50,8 +79,12 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSoundTrack", let destination = segue.destination as? SoundTrack {
             if let indexPath = tableView.indexPathForSelectedRow {
-                destination.trackURL = songs[indexPath.row]
+                destination.song = songs[indexPath.row]
             }
         }
     }
+}
+
+#Preview{
+    TableViewController()
 }
