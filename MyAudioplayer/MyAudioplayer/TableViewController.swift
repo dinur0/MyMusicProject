@@ -81,6 +81,8 @@ class TableViewController: UITableViewController {
         if segue.identifier == "showSoundTrack", let destination = segue.destination as? SoundTrack {
             if let indexPath = tableView.indexPathForSelectedRow {
                 destination.song = songs[indexPath.row]
+                destination.songs = songs
+                destination.currentIndex = indexPath.row
             }
         }
     }
