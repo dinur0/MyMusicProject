@@ -29,12 +29,14 @@ class TableViewController: UITableViewController {
                         let metadata = getMetadata(for: fileURL)
                         let song = Song(url: fileURL, title: metadata.title, artist: metadata.artist)
                         songs.append(song)
-                        print(song)
+                        print("Loaded song: \(song.title) by \(song.artist)")
                     }
                 }
             } catch {
-                print("Error while enumerating files \(musicFolderPath): \(error.localizedDescription)")
+                print("Error while enumerating files at \(musicFolderPath): \(error.localizedDescription)")
             }
+        } else {
+            print("Could not find resource path.")
         }
         tableView.reloadData()
     }
@@ -68,7 +70,6 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let song = songs[indexPath.row]
-//        cell.textLabel?.text = "sdfsdfsdf"
         cell.textLabel?.text = song.title
         cell.detailTextLabel?.text = song.artist
         return cell
@@ -83,8 +84,4 @@ class TableViewController: UITableViewController {
             }
         }
     }
-}
-
-#Preview{
-    TableViewController()
 }
