@@ -6,6 +6,8 @@ class SoundTrack: UIViewController {
     var player: AVPlayer?
     var isPlaying = false
     var song: Song?
+    var songs: [Song] = []
+    var currentIndex: Int = 0
     var timeObserverToken: Any?
     
     @IBOutlet weak var songTitleLabel: UILabel!
@@ -13,21 +15,12 @@ class SoundTrack: UIViewController {
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var durationTimeLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
-    
-    @IBOutlet var prevTrackButton: UIButton!
     @IBOutlet weak var timeSlider: UISlider!
-    
-    @IBOutlet var nextTrackButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let song = song {
-            player = AVPlayer(url: song.url)
-            songTitleLabel.text = song.title
-            songArtistLabel.text = song.artist
-            addTimeObserver()
-            updateDurationLabel()
-        }
+        loadCurrentSong()
+        addTimeObserver()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -35,12 +28,18 @@ class SoundTrack: UIViewController {
         removeTimeObserver()
     }
     
-    @IBAction func previousMusic(_ sender: UIButton) {
-        // Implement previous track functionality if needed
+    @IBAction func previousMusicButton(_ sender: UIButton) {
+        if currentIndex > 0 {
+            currentIndex -= 1
+            loadCurrentSong()
+        }
     }
     
-    @IBAction func nextMusic(_ sender: UIButton) {
-        // Implement next track functionality if needed
+    @IBAction func nextMusicButton(_ sender: UIButton) {
+        if currentIndex < songs.count - 1 {
+            currentIndex += 1
+            loadCurrentSong()
+        }
     }
     
     @IBAction func playOrPause(_ sender: UIButton) {
@@ -63,6 +62,16 @@ class SoundTrack: UIViewController {
             let seekTime = CMTime(value: CMTimeValue(value * 1000), timescale: 1000)
             player.seek(to: seekTime)
         }
+    }
+    
+    func loadCurrentSong() {
+        let song = songs[currentIndex]
+        self.song = song
+        player = AVPlayer(url: song.url)
+        songTitleLabel.text = song.title
+        songArtistLabel.text = song.artist
+        updateDurationLabel()
+        playOrPause(playButton) // Automatically start playing the song
     }
     
     func addTimeObserver() {
@@ -103,8 +112,4 @@ class SoundTrack: UIViewController {
         let secs = Int(seconds) % 60
         return String(format: "%02d:%02d", mins, secs)
     }
-}
-
-#Preview{
-    SoundTrack()
 }
